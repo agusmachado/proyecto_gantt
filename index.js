@@ -1,11 +1,12 @@
-import dotenv from "dotenv";
+import express from 'express';
+import dotenv from 'dotenv';
+import conectarDB from './config/db.js';
+import lineaRoutes from './routes/lineaRoutes.js';
+
 dotenv.config();
 
-import express from "express";
-import conectarDB from "./config/db.js";
-import lineaRoutes from "./routes/lineaRoutes.js";
-
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // ---- CONEXIÓN BASE DE DATOS ---- //
 conectarDB();
@@ -15,16 +16,13 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // ---- HABILITAMOS LAS VARIABLES DE ENTORNO ---- //
-const PORT = process.env.PORT || 5000;
-
 app.use(express.json());
-app.use('/api/linea', lineaRoutes);
+
+// ---- RUTAS PARA EL PROYECTO GANTT ---- //
+app.use('/api', lineaRoutes);
 
 // ---- INICIO DEL SERVIDOR ---- //
-try {
-  app.listen(PORT, () => {
-    console.log(`Servidor ok en puerto ${PORT}`);
-  });
-} catch (error) {
-  console.error("Error al iniciar el servidor:", error);
-}
+app.listen(PORT, () => {
+  console.log(`Servidor ok en puerto ${PORT}`);
+});
+
