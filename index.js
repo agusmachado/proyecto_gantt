@@ -6,6 +6,9 @@ import lineaRoutes from './routes/lineaRoutes.js';
 dotenv.config();
 
 const app = express();
+
+// ---- HABILITAMOS LAS VARIABLES DE ENTORNO ---- //
+
 const PORT = process.env.PORT || 5000;
 
 // ---- CONEXIÓN BASE DE DATOS ---- //
@@ -15,11 +18,12 @@ conectarDB();
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-// ---- HABILITAMOS LAS VARIABLES DE ENTORNO ---- //
+// ---- MIDDLEWARE PARA PROCESAR LOS DATOS DEL FORMULARIO ---- //
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // ---- RUTAS PARA EL PROYECTO GANTT ---- //
-app.use('/api', lineaRoutes);
+app.use('/', lineaRoutes); // Asegúrate de incluir la barra ('/') para que las rutas funcionen correctamente
 
 // ---- INICIO DEL SERVIDOR ---- //
 app.listen(PORT, () => {

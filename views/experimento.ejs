@@ -1,0 +1,85 @@
+<!-- En tu archivo gantt.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Diagrama de Gantt</title>
+  <!-- Enlaza a Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Barra superior -->
+<div class="container-fluid">
+    <div class="row bg-dark text-white">
+  
+      <!-- Parte izquierda con proyectos -->
+      <div class="col-sm-3 bg-danger text-center" style="width: 20%;">
+        <h4 class="my-2">Proyectos</h4>
+        <!-- Puedes agregar aquí tus proyectos dinámicamente con EJS -->
+  
+        <!-- Filas adicionales debajo de la parte derecha -->
+        <div class="row mt-3">
+  
+          <!-- Columna de Título (60% del ancho) -->
+          <div class="col-sm-7">
+            <h4>Título</h4>
+            <!-- Puedes agregar aquí el contenido correspondiente al título -->
+          </div>
+  
+          <!-- Columna de Inicio (20% del ancho) -->
+          <div class="col-sm-2">
+            <h4>Inicio</h4>
+            <!-- Puedes agregar aquí el contenido correspondiente al inicio -->
+          </div>
+  
+          <!-- Columna de Fin (20% del ancho) -->
+          <div class="col-sm-3">
+            <h4>Fin</h4>
+            <!-- Puedes agregar aquí el contenido correspondiente al fin -->
+          </div>    
+        </div>
+      </div>
+  
+      <!-- Parte derecha con meses -->
+      <div class="col-sm-9 text-center">
+        <h4 class="my-2">Meses</h4>
+        <div id="meses-container" class="d-flex">
+          <!-- Meses se agregarán aquí dinámicamente con JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Script para agregar dinámicamente los meses con AJAX -->
+  <!-- Script para agregar dinámicamente los meses -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const mesesContainer = document.getElementById("meses-container");
+  
+      // Obtener la fecha actual
+      const fechaActual = new Date();
+      const mesActual = fechaActual.getMonth(); // Meses en JavaScript son de 0 a 11
+  
+      // Agregar los meses al contenedor
+      for (let i = mesActual; i < mesActual + 12; i++) {
+        const divMes = document.createElement("div");
+        divMes.classList.add("col-sm-1");
+        divMes.textContent = new Date(0, i).toLocaleString('default', { month: 'long' });
+        mesesContainer.appendChild(divMes);
+      }
+    });
+  </script>
+  
+  
+  
+
+<!-- Enlaza a Bootstrap JS y jQuery (necesarios para algunas funciones de Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
